@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^4.3.7"
+    "async": "^1.5.2",
+    "mongoose": "^4.4.3",
+    "mongoose-post-find": "0.0.2"
   }
 }

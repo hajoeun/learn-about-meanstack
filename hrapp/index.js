@@ -3,6 +3,7 @@ var employeeService = require('./lib/employees');
 var responder = require('./lib/responseGenerator');
 var staticFile = responder.staticFile('/public');
 
+
 http.createServer(function (req, res) {
  var _url;
 
@@ -18,7 +19,7 @@ http.createServer(function (req, res) {
 
  if (_url = /^\/employees$/i.exec(req.url)) {
   //직원 목록 반환
-  employeeService.getEmployees(function (erro, data) {
+  employeeService.getEmployees(function (error, data) {
    if (error) {
     //500 오류 전송
     return responder.send500(error, res);
