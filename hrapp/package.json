@@ -4,7 +4,8 @@
   "description": "meanstack-example-app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "populate": "node ./bin/populate_db"
   },
   "author": "",
   "license": "ISC",
