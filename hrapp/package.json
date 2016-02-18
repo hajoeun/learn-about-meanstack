@@ -5,13 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
     "populate": "node ./bin/populate_db"
   },
-  "author": "",
+  "author": "Joeun Ha",
   "license": "ISC",
   "dependencies": {
     "async": "^1.5.2",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
     "mongoose": "^4.4.3",
-    "mongoose-post-find": "0.0.2"
+    "mongoose-post-find": "0.0.2",
+    "morgan": "^1.6.1",
+    "serve-favicon": "^2.3.0"
   }
 }
