@@ -50,4 +50,46 @@ router.put('/employees/:employeeId', function (req, res, next) {
   });
 });
 
+router.post('/employees', function(req, res, next) {
+ Employee.create({
+  id: '1000327',
+  name: {
+   first: req.body.first,
+   last: req.body.last
+  }
+ }, function (error) {
+  if (error) {
+   return next(error)
+  }
+ });
+
+ Employee.find().sort('name.last').exec(function(error, results) {
+   if (error) {
+     return next(error);
+   }
+
+   // 유효한 데이터로 응답한다
+   res.json(results);
+ });
+});
+
+router.delete('/employees/:employeeId', function(req, res, next) {
+ Employee.remove({
+  id: req.params.employeeId
+ }, function(error) {
+  if (error) {
+   return next(error);
+  }
+ });
+
+ Employee.find().sort('name.last').exec(function(error, results) {
+   if (error) {
+     return next(error);
+   }
+
+   // 유효한 데이터로 응답한다
+   res.json(results);
+ });
+});
+
 module.exports = router;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+ <meta charset="utf-8">
+ <title>Angular Directives</title>
+</head>
+<body>
+ <author-names></author-names>
+ <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+ <script>
+  'use strict';
+  var app = angular.module('app', []);
+
+  app.directive('authorNames', function($compile) {
+   return {
+    restrict: 'E',
+    controller:  function($scope) {
+     $scope.people = [
+      {
+       firstName: 'Colin',
+       lastName: 'Ihrig'
+      },
+      {
+       firstName: 'Joeun',
+       lastName: 'Ha'
+      }
+     ];
+    },
+    link: function(scope, element, attrs, controller, transclude) {
+     var template = scope.people.map(function(person) {
+      var str = '<div>' + person.firstName + ' ' + person.lastName + '</div>';
+       return str;
+     }).join('');
+     var newElement = $compile(template)(scope);
+
+     element.replaceWith(newElement);
+    }
+   };
+  });
+ </script>
+</body>
+</html>
