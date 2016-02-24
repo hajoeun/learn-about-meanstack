@@ -52,7 +52,7 @@ router.put('/employees/:employeeId', function (req, res, next) {
 
 router.post('/employees', function(req, res, next) {
  Employee.create({
-  id: '1000327',
+  id: '1000492',
   name: {
    first: req.body.first,
    last: req.body.last
