@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Debugging Test</title>
+</head>
+<body>
+ <span></span>
+ <script>
+  var span = document.querySelector('span');
+  var i = 0;
+  var j = 1;
+
+  debugger;
+
+  if (i === j) {
+   span.innerText = "Hello!";
+  }
+ </script>
+</body>
+</html>
