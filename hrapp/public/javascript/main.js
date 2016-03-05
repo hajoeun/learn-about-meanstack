@@ -1,45 +1,36 @@
-(function(a, window){var app = angular.module('app', ['ngRoute', 'ngResource']);
-app.config(['$routeProvider', function($routeProvider) {
-  $routeProvider
-  .when('/view', {
-    templateUrl: 'view.html',
-    controller: 'view'
-  })
-  .when('/edit/:employeeId', {
-    templateUrl: 'edit.html',
-    controller: 'edit'
-  })
-  .otherwise({
-    redirectTo: '/'
-  });
-}]);
+var app = angular.module('app', ['ngResource']);
 
 app.factory('EmployeeService', ['$resource', function($resource) {
   return $resource('/employees/:employeeId', {}, {
-    list: {
+    get: {
       isArray: true
     },
-    get: {
+    post: {
+      method: 'POST',
       isArray: false
     }
   });
 }]);
 
-app.controller('edit', ['$scope', 'EmployeeService','$routeParams', function($scope, EmployeeService, $routeParams) {
-  $scope.employee = {};
-  EmployeeService.get({
-    employeeId: $routeParams.employeeId
-  }, function (data) {
-    $scope.employee = data;
-  });
-}]);
-
-app.controller('view', ['$scope', 'EmployeeService', function($scope, EmployeeService) {
+app.controller('main', ['$scope', 'EmployeeService', function($scope, EmployeeService) {
   $scope.employees = [];
   $scope.firstName = $scope.lastName = '';
 
-  EmployeeService.list(function (data) {
+  EmployeeService.get(function (data) {
     $scope.employees = data;
   });
+
+  $scope.addDisabled = function () {
+    return !($scope.firstName.trim().length && $scope.lastName.trim().length);
+  }
+
+  $scope.add = function () {
+    EmployeeService.post({
+      first: $scope.firstName,
+      last: $scope.lastName
+    }, function (data) {
+      $scope.employees.push(data);
+      $scope.firstName = $scope.lastName = '';
+    });
+  };
 }]);
-}(angular, window));
